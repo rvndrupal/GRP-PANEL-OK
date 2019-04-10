@@ -30,10 +30,18 @@
 
 
 		<div class="margin" id="botones_control">
+              @can('add_user')
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar Usuario</a>
+              @endcan
+              @can('listar_usuarios')
               <a href="{{ url("/listado_usuarios") }}"  class="btn btn-xs btn-primary" >Listado Usuarios</a>
+              @endcan
+              @can('alta_roles')
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a>
+              @endcan
+              @can('alta_permisos')
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>
+              @endcan
 		</div>
 
     </div>
