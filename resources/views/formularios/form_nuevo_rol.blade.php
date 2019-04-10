@@ -1,4 +1,4 @@
-@role('admin')
+@can('alta_roles')
 <section  >
 <div class="col-md-12">
 
@@ -88,8 +88,10 @@
 			<td class="mailbox-messages mailbox-name"><a href="javascript:void(0);" style="display:block"><i class="fa fa-user"></i>&nbsp;&nbsp;{{ $rol->slug  }}</a></td>
 			<td>{{ $rol->description }}</td>
 			<td>
+            @can('delete_rol')
 			<button type="button"  class="btn  btn-danger btn-xs" onclick="borrar_rol({{ $rol->id }});"   ><i class="fa fa-fw fa-remove"></i></button>
-			</td>
+            </td>
+            @endcan
 		</tr>
 	    @endforeach
 
@@ -106,5 +108,5 @@
 @else
  <br/><div class='rechazado'><label style='color:#FA206A'>"no tiene permisos para esta seccion"</label>  </div>
 
-@endrole
+@endcan
 
