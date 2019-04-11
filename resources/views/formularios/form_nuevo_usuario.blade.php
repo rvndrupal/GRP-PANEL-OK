@@ -2,6 +2,8 @@
 
  <div class="col-md-12">
 
+        <a href="#"  class="btn btn-sm btn-danger cerrarModal" style="margin: 0 0 6px 1200px;" onclick="cerrarModal();"> X </a>
+
   <div class="box box-primary  box-gris">
 
     <div class="box-header with-border my-box-header">

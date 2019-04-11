@@ -2,7 +2,7 @@ function  verinfo_usuario(arg){
 
 
 	var urlraiz=$("#url_raiz_proyecto").val();
-	var miurl =urlraiz+"/form_editar_usuario/"+arg+""; 
+	var miurl =urlraiz+"/form_editar_usuario/"+arg+"";
 	$("#capa_modal").show();
 	$("#capa_formularios").show();
 	var screenTop = $(document).scrollTop();
@@ -11,15 +11,15 @@ function  verinfo_usuario(arg){
 
     $.ajax({
     url: miurl
-    }).done( function(resul) 
+    }).done( function(resul)
     {
      $("#capa_formularios").html(resul);
-   
-    }).fail( function() 
+
+    }).fail( function()
    {
     $("#capa_formularios").html('<span>...Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
    }) ;
- 
+
 }
 
 
@@ -28,8 +28,16 @@ function  verinfo_usuario(arg){
 $(document).on("click",".div_modal", function(e){
 	$(this).hide();
 	$("#capa_formularios").hide();
-	$("#capa_formularios").html("");
+    $("#capa_formularios").html("");
+
 })
+
+
+function cerrarModal(){
+    $("#capa_formularios").hide();
+    $("#capa_formularios").html("");
+    $("#capa_modal").hide();
+}
 
 
 
@@ -47,11 +55,11 @@ function cargar_formulario(arg){
 
     $.ajax({
     url: miurl
-    }).done( function(resul) 
+    }).done( function(resul)
     {
      $("#capa_formularios").html(resul);
-   
-    }).fail( function() 
+
+    }).fail( function()
    {
     $("#capa_formularios").html('<span>...Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
    }) ;
@@ -71,19 +79,19 @@ $(document).on("submit",".formentrada",function(e){
   if(quien=="f_editar_acceso"){  var varurl=$(this).attr("action");  var div_resul="notificacion_E3";  }
   if(quien=="f_borrar_usuario"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
   if(quien=="f_asignar_permiso"){  var varurl=$(this).attr("action");  var div_resul="capa_formularios";  }
-  
+
   $("#"+div_resul+"").html( $("#cargador_empresa").html());
-  
+
   $.ajax({
     // la URL para la petición
     url : varurl,
     data : formu.serialize(),
     type : 'POST',
     dataType : 'html',
-  
+
     success : function(resul) {
       $("#"+div_resul+"").html(resul);
-       
+
     },
     error : function(xhr, status) {
 
@@ -101,19 +109,19 @@ $(document).on("submit",".form_crear_rol",function(e){
   e.preventDefault();
   var quien=$(this).attr("id");
   var formu=$(this);
-  var varurl=$(this).attr("action"); 
+  var varurl=$(this).attr("action");
 
    $("#div_notificacion_rol").html( $("#cargador_empresa").html());
    $(".form-group").removeClass("has-error");
    $(".help-block").text('');
-  
+
   $.ajax({
     // la URL para la petición
     url : varurl,
     data : formu.serialize(),
     type : 'POST',
     dataType : "html",
-  
+
     success : function(resul) {
       $("#capa_formularios").html(resul);
     },
@@ -127,11 +135,11 @@ $(document).on("submit",".form_crear_rol",function(e){
                });
 
            $("#div_notificacion_rol").html('');
-           
+
     }
 
   });
-  
+
 
 
 
@@ -146,12 +154,12 @@ function asignar_rol(idusu){
    var idrol=$("#rol1").val();
    var urlraiz=$("#url_raiz_proyecto").val();
    $("#zona_etiquetas_roles").html($("#cargador_empresa").html());
-   var miurl=urlraiz+"/asignar_rol/"+idusu+"/"+idrol+""; 
+   var miurl=urlraiz+"/asignar_rol/"+idusu+"/"+idrol+"";
 
     $.ajax({
     url: miurl
-    }).done( function(resul) 
-    { 
+    }).done( function(resul)
+    {
       var etiquetas="";
       var roles=$.parseJSON(resul);
       $.each(roles,function(index, value) {
@@ -159,8 +167,8 @@ function asignar_rol(idusu){
       })
 
      $("#zona_etiquetas_roles").html(etiquetas);
-   
-    }).fail( function() 
+
+    }).fail( function()
     {
     $("#zona_etiquetas_roles").html('<span style="color:red;">...Error: Aun no ha agregado roles o revise su conexion...</span>');
     }) ;
@@ -172,12 +180,12 @@ function quitar_rol(idusu){
    var idrol=$("#rol2").val();
    var urlraiz=$("#url_raiz_proyecto").val();
    $("#zona_etiquetas_roles").html($("#cargador_empresa").html());
-   var miurl=urlraiz+"/quitar_rol/"+idusu+"/"+idrol+""; 
+   var miurl=urlraiz+"/quitar_rol/"+idusu+"/"+idrol+"";
 
     $.ajax({
     url: miurl
-    }).done( function(resul) 
-    { 
+    }).done( function(resul)
+    {
       var etiquetas="";
       var roles=$.parseJSON(resul);
       $.each(roles,function(index, value) {
@@ -185,8 +193,8 @@ function quitar_rol(idusu){
       })
 
      $("#zona_etiquetas_roles").html(etiquetas);
-   
-    }).fail( function() 
+
+    }).fail( function()
     {
     $("#zona_etiquetas_roles").html('<span style="color:red;">...Error: Aun no ha agregado roles  o revise su conexion...</span>');
     }) ;
@@ -202,16 +210,16 @@ function borrado_usuario(idusu){
    var screenTop = $(document).scrollTop();
    $("#capa_formularios").css('top', screenTop);
    $("#capa_formularios").html($("#cargador_empresa").html());
-   var miurl=urlraiz+"/form_borrado_usuario/"+idusu+""; 
-  
+   var miurl=urlraiz+"/form_borrado_usuario/"+idusu+"";
+
 
     $.ajax({
     url: miurl
-    }).done( function(resul) 
+    }).done( function(resul)
     {
      $("#capa_formularios").html(resul);
-   
-    }).fail( function(resul) 
+
+    }).fail( function(resul)
    {
     $("#capa_formularios").html(resul);
    }) ;
@@ -223,15 +231,15 @@ function borrado_usuario(idusu){
 function borrar_permiso(idrol,idper){
 
      var urlraiz=$("#url_raiz_proyecto").val();
-     var miurl=urlraiz+"/quitar_permiso/"+idrol+"/"+idper+""; 
+     var miurl=urlraiz+"/quitar_permiso/"+idrol+"/"+idper+"";
      $("#filaP_"+idper+"").html($("#cargador_empresa").html() );
         $.ajax({
     url: miurl
-    }).done( function(resul) 
+    }).done( function(resul)
     {
      $("#filaP_"+idper+"").hide();
-   
-    }).fail( function() 
+
+    }).fail( function()
    {
      alert("No se borro correctamente, intentalo nuevamente o revisa tu conexion");
    }) ;
@@ -244,15 +252,15 @@ function borrar_permiso(idrol,idper){
 function borrar_rol(idrol){
 
      var urlraiz=$("#url_raiz_proyecto").val();
-     var miurl=urlraiz+"/borrar_rol/"+idrol+""; 
+     var miurl=urlraiz+"/borrar_rol/"+idrol+"";
      $("#filaR_"+idrol+"").html($("#cargador_empresa").html() );
         $.ajax({
     url: miurl
-    }).done( function(resul) 
+    }).done( function(resul)
     {
      $("#filaR_"+idrol+"").hide();
-   
-    }).fail( function() 
+
+    }).fail( function()
    {
      alert("No se borro correctamente, intentalo nuevamente o revisa tu conexion");
    }) ;
