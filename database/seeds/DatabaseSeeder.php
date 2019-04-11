@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         //$this->call(PermissionsTableSeeder::class);
+         $this->call(PermissionsTableSeeder::class);
          factory(App\User::class, 1)->create();
 
 
@@ -20,6 +20,12 @@ class DatabaseSeeder extends Seeder
             'name'  => 'Admin',
             'slug'  => 'admin',
             'special' => 'all-access'
+        ]);
+
+        Role::create([
+            'name'  => 'Consulta',
+            'slug'  => 'consulta',
+            'special' => 'no-access'
         ]);
 
         App\User::create([

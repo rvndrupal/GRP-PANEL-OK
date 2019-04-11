@@ -1,4 +1,3 @@
-@can('alta_roles')
 <section  >
 <div class="col-md-12">
 
@@ -86,11 +85,11 @@
 	    @foreach($roles as $rol)
 		<tr role="row" class="odd" id="filaR_{{  $rol->id }}">
 			<td>{{ $rol->id }}</td>
-			<td><span class="label label-default">{{ $rol->name or "Ninguno" }}</span></td>
+			<td><span class="label label-default">{{ $rol->name  }}</span></td>
 			<td class="mailbox-messages mailbox-name"><a href="javascript:void(0);" style="display:block"><i class="fa fa-user"></i>&nbsp;&nbsp;{{ $rol->slug  }}</a></td>
 			<td>{{ $rol->description }}</td>
 			<td>
-            @can('delete_rol')
+            @can('rol.delete')
 			<button type="button"  class="btn  btn-danger btn-xs" onclick="borrar_rol({{ $rol->id }});"   ><i class="fa fa-fw fa-remove"></i></button>
             </td>
             @endcan
@@ -107,8 +106,8 @@
 
 
 </section>
-@else
- <br/><div class='rechazado'><label style='color:#FA206A'>"no tiene permisos para esta seccion"</label>  </div>
 
-@endcan
+
+
+
 

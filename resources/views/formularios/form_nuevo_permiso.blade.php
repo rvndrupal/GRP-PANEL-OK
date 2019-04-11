@@ -19,9 +19,9 @@
 							<label class="col-sm-2" for="rol">Rol*</label>
 		    			<div class="col-sm-10" >
 
-		                     <select id="rol_sel" name="rol_sel" class="form-control" required>
+		                     <select id="rol_sel" name="rol_sel" class="form-control"  required>
 		                     @foreach($roles as $rol)
-		                     <option value="{{ $rol->id }}">{{ $rol->name }}</option>
+		                     <option value="{{ $rol->id }}">{{ $rol->name }} - {{ $rol->description }}</option>
 		                     @endforeach
 		    				</select>
 
@@ -32,17 +32,23 @@
 							<label class="col-sm-2" for="rol">Permisos*</label>
 		    			<div class="col-sm-10" >
 
-		                     <select id="permiso_rol" name="permiso_rol" class="form-control" required>
+		                     <select id="permiso_rol" name="permiso_rol[]" class="form-control" multiple required >
 		                     @foreach($permisos as $permiso)
 		                     <option value="{{ $permiso->id }}">{{ $permiso->name }}</option>
 		                     @endforeach
 		    				</select>
 
-		                </div>
+                        </div>
+
+
+
+
 						</div><!-- /.form-group -->
 
 						<div class="box-footer col-xs-12 box-gris ">
-		                        <button type="submit" class="btn btn-primary">Agregar Permiso</button>
+                                @can('asignar.permiso')
+                                <button type="submit" class="btn btn-primary">Agregar Permiso</button>
+                                @endcan
 		                </div>
 					 </form>
 		        </div>
@@ -132,7 +138,9 @@
 			<td class="mailbox-messages mailbox-name"><a href="javascript:void(0);" style="display:block"></i>&nbsp;&nbsp;{{ $permiso->slug  }}</a></td>
 			<td>{{ $permiso->description }}</td>
 			<td>
-			<button type="button"  class="btn  btn-danger btn-xs"  onclick="borrar_permiso({{ $rol->id }},{{ $permiso->id }});"  ><i class="fa fa-fw fa-remove"></i></button>
+            @can('eliminar.permiso.rol')
+            <button type="button"  class="btn  btn-danger btn-xs"  onclick="borrar_permiso({{ $rol->id }},{{ $permiso->id }});"  ><i class="fa fa-fw fa-remove"></i></button>
+            @endcan
 			</td>
 		   </tr>
 

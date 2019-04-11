@@ -30,16 +30,16 @@
 
 
 		<div class="margin" id="botones_control">
-              @can('add_user')
+              @can('users.add')
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(1);">Agregar Usuario</a>
               @endcan
-              @can('listar_usuarios')
+              @can('users.list')
               <a href="{{ url("/listado_usuarios") }}"  class="btn btn-xs btn-primary" >Listado Usuarios</a>
               @endcan
-              @can('alta_roles')
+              @can('rol.add')
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(2);">Roles</a>
               @endcan
-              @can('alta_permisos')
+              @can('permisos.add')
               <a href="javascript:void(0);" class="btn btn-xs btn-primary" onclick="cargar_formulario(3);" >Permisos</a>
               @endcan
 		</div>
@@ -64,20 +64,22 @@
 	    @foreach($usuarios as $usuario)
 		<tr role="row" class="odd">
 			<td>{{ $usuario->id }}</td>
-			<td><span class="label label-default">
-
-             @foreach($usuario->getRoles() as $roles)
-			 {{  $roles.","  }}
-             @endforeach
-
-             -</span>
-			</td>
+			<td>
+                <select id="permiso_rol" name="permiso_rol[]" class="form-control" >
+                    @foreach($usuario->getRoles() as $roles)
+                    <option value="{{ $roles }}">{{ $roles }}</option>
+                    @endforeach
+                </select>
+           </td>
 			<td class="mailbox-messages mailbox-name"><a href="javascript:void(0);"  style="display:block"><i class="fa fa-user"></i>&nbsp;&nbsp;{{ $usuario->username  }}</a></td>
 			<td>{{ $usuario->email }}</td>
 			<td>
-
-			<button type="button" class="btn  btn-default btn-xs" onclick="verinfo_usuario({{  $usuario->id }})" ><i class="fa fa-fw fa-edit"></i></button>
-			<button type="button"  class="btn  btn-danger btn-xs"  onclick="borrado_usuario({{  $usuario->id }});"  ><i class="fa fa-fw fa-remove"></i></button>
+            @can('users.edit')
+            <button type="button" class="btn  btn-default btn-xs" onclick="verinfo_usuario({{  $usuario->id }})" ><i class="fa fa-fw fa-edit"></i></button>
+            @endcan
+            @can('users.delete')
+            <button type="button"  class="btn  btn-danger btn-xs"  onclick="borrado_usuario({{  $usuario->id }});"  ><i class="fa fa-fw fa-remove"></i></button>
+            @endcan
 			</td>
 		</tr>
 	    @endforeach

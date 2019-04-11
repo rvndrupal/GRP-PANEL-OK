@@ -30,14 +30,15 @@
                   <select id="rol1" name="rol1" class="form-control">
 
                            @foreach($roles as $rol)
-                           <option value="{{ $rol->id }}">{{ $rol->name }}</option>
+                           <option value="{{ $rol->id }}">{{ $rol->name }} -- {{ $rol->description }}</option>
                            @endforeach
                   </select>
                 </div>
 
                 <div class="col-sm-4" >
-
+                 @can('asignar.rol')
                   <button type="button" class="btn btn-xs btn-primary" onclick="asignar_rol({{ $usuario->id }});" >Asignar rol</button>
+                  @endcan
                 </div>
 
 
@@ -52,13 +53,15 @@
                 <div class="col-sm-6" >
                   <select id="rol2" name="rol2" class="form-control">
                            @foreach($roles as $rol)
-                           <option value="{{ $rol->id }}">{{ $rol->name }}</option>
+                           <option value="{{ $rol->id }}">{{ $rol->name }} -- {{ $rol->description }}</option>
                            @endforeach
                   </select>
                 </div>
 
                 <div class="col-sm-4" >
+                @can('delete.rol.user')
                   <button type="button" class="btn btn-xs btn-primary" onclick="quitar_rol({{ $usuario->id }});" >Quitar rol</button>
+                  @endcan
                 </div>
 
 
@@ -126,7 +129,9 @@
             </div><!-- /.col -->
 
           <div class="box-footer col-xs-12 box-gris ">
+              @can('users.update')
                 <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+              @endcan
           </div>
 
           </form>
@@ -188,7 +193,9 @@
 
 
                     <div class=" col-xs-12 box-gris ">
-                                        <button type="submit" class="btn btn-primary">Actualizar Acceso</button>
+                    @can('update.access')
+                    <button type="submit" class="btn btn-primary">Actualizar Acceso</button>
+                    @endcan
                     </div>
 
                    </form>

@@ -157,7 +157,9 @@ public function asignar_permiso(Request $request){
      $roleid=$request->input("rol_sel");
      $idper=$request->input("permiso_rol");
      $rol=Role::find($roleid);
+
      $rol->assignPermission($idper);
+
 
     if($rol->save())
     {
